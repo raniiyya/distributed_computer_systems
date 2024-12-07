@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Web Service Client</title>
+</head>
+<body>
+    <h1>Simple Web Service Client</h1>
+    <form id="messageForm">
+        <label for="message">Enter your message:</label>
+        <input type="text" id="message" name="message" required>
+        <button type="submit">Send</button>
+    </form>
+    <p id="response"></p>
+
+    <script>
+        document.getElementById('messageForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const message = document.getElementById('message').value;
+            const response = await fetch('http://localhost:8080/SimpleService', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/soap+xml',
+                },
+                body: `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://example.com/">
+                           <soapenv:Header/>
+                           <soapenv:Body>
+                               <ser:printMessage>
+                                   <arg0>${message}</arg0>
+                               </ser:printMessage>
+                           </soapenv:Body>
+                       </soapenv:Envelope>`
+            });
+            const text = await response.text();
+            document.getElementById('response').innerText = `Response: ${text}`;
+        });
+    </script>
+</body>
+</html>
