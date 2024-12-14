@@ -7,7 +7,7 @@ public class LoginServlet extends HttpServlet {
     private Map<String, String> users = new HashMap<>();
 
     public void init() {
-        // This mimics a pre-registered user database
+       
         users.put("testuser", "testpass");
     }
 
