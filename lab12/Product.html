@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product</title>
+</head>
+<body>
+    <h1>Product Details</h1>
+    <p>Name: <span th:text="${product.name}"></span></p>
+    <p>Price: <span th:text="${product.price}"></span></p>
+    <p>Quantity: <span th:text="${product.quantity}"></span></p>
+    <p>Color: <span th:text="${product.color}"></span></p>
+    <p>Production Year: <span th:text="${product.productionYear}"></span></p>
+    <p>Description: <span th:text="${product.description}"></span></p>
+
+    <form th:action="@{/shop/add-to-basket}" method="post">
+        <input type="hidden" name="name" th:value="${product.name}" />
+        <input type="hidden" name="price" th:value="${product.price}" />
+        <input type="hidden" name="quantity" th:value="${product.quantity}" />
+        <input type="hidden" name="color" th:value="${product.color}" />
+        <input type="hidden" name="productionYear" th:value="${product.productionYear}" />
+        <input type="hidden" name="description" th:value="${product.description}" />
+        <button type="submit">Add to Basket</button>
+    </form>
+</body>
+</html>
